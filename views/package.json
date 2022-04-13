@@ -1,0 +1,17 @@
+{
+  "name": "shakespearen-pokemon",
+  "version": "1.0.0",
+  "description": "Gotta catcheth those folk all API ",
+  "main": "index.js",
+  "author": "Chloe Brown",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "express": "^4.17.2"
+  },
+  "scripts": {
+    "serve": "npx nodemon index.js",
+    "seed": "node db/seed.js"
+  }
+}

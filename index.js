@@ -7,7 +7,7 @@ const PORT = 4000
 // POKEMON API
 const pokemonApiUrl = 'https://pokeapi.co/api/v2'
 
-const getPokemon = async (_req, res) => {
+const getPokemon = async () => {
   // get the pokemon
   try {
     const { data } = await axios.get(`${pokemonApiUrl}/pokemon`, {
@@ -16,18 +16,37 @@ const getPokemon = async (_req, res) => {
         limit: 20,
       }
     })
-    console.log(data)
-  const singlePoke = data.results.find(poke => 
-    poke.name === "charmander")
-    console.log(singlePoke)
-
-    // res.status(200).json()
+    console.log('pokemonData-->', data)
+    const pokeObj = data.results.map((poke, index) => {
+      return {
+        name: poke.name,
+        url: poke.url,
+        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
+        id: index + 1,
+      }
+    })
   } catch (error) {
     console.log(error)
   }
-
 }
 getPokemon()
+
+// take the pokemon name as parameter and return the description
+const getDescription = async (pokeName) => {
+try {
+  const { data } = await axios.get(`${pokemonApiUrl}/pokemon-species/`  + pokeName, {
+    params: {
+      offset: 0,
+      limit: 20,
+    }
+  })
+  console.log('Description: ', data.flavor_text_entries[1].flavor_text)
+} catch (error) {
+  console.log(error)
+}
+}
+getDescription('pikachu')
+getDescription('charmander')
 
 
 // MIDDLEWARE

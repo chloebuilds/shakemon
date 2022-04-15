@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 
 function App() {
-  React.useEffect(() => {
+
+  const id = 6
+
+  useEffect(() => {
     const getData = async () => {
-      const res = await axios.get('/pokemon')
-      console.log(res.data)
+      const { data } = await axios.get(`/pokemon/${id}`) 
+      console.log(data)
     }
     getData()
   })

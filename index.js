@@ -39,9 +39,9 @@ app.get('/pokemon/:id', async (req, res) => {
     return res.status(200).json(response)
   } catch (error) {
     console.log('error', error)
+    return res.status(404).json({ message: 'Uh oh! We have an error!'})
   }
 })
-
 
 // CATCH ALL RESPONSE
 app.use((_req, res) => {

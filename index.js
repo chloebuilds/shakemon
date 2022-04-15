@@ -7,63 +7,33 @@ const PORT = 4000
 // POKEMON API
 const pokemonApiUrl = 'https://pokeapi.co/api/v2'
 
-const getPokemon = async (pokeName) => {
-  // get the pokemon
-  try {
-    // GETS ALL THE POKEMON AND THEN WE FIND THE ONE WE ARE PASSING WITH POKENAME
-    const { data } = await axios.get(`${pokemonApiUrl}/pokemon`, {
-      params: {
-        offset: 0,
-        limit: 5,
-      },
-    })
-    // get pokemon data for single pokemon
-    const pokeObjectSet = data.results.map((poke, index) => {
-      return {
-        name: poke.name,
-        url: poke.url,
-        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
-        id: index + 1,
-      }
-  })
-console.log('pokeObjectSet', pokeObjectSet)
-const singlePokeObj = data.results.find((poke, index) => {
-  console.log('FINDING', pokeName, poke.name)
-  if (poke.name === pokeName) {
-    return {
-      name: poke.name,
-      url: poke.url,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
-      id: index + 1,
-    }
-  }
-}) 
-    // console.log('pokemonData-->', data)
-    // take the pokemon name as parameter and return the description
-    const descriptionData = await axios.get(`${pokemonApiUrl}/pokemon-species/` + pokeName, {
-      params: {
-        offset: 0,
-        limit: 20,
-      },
-    })
-    // console.log('Description: ', data.flavor_text_entries[1].flavor_text)
-const pokeDescription = descriptionData.flavor_text_entries[1].flavor_text
-console.log('pokeDescription', pokeDescription)
-  } catch (error) {
-    console.log(error)
-  }
-}
-const pokeData = getPokemon('charmander')
-console.log('pokeData', pokeData)
 
 // MIDDLEWARE
 app.use(express.json())
 
-// ROUTES
-const router = express.Router()
+// ROUTE - GOTTA CATCH EM ALL
+app.get('/pokemon/:id', async (req, res) => {
+  try {
+    // Response object
+    const response = {}
 
-// GOTTA CATCH EM ALL
-router.route('/pokemon/:id').get(getPokemon)
+    // Get pokemon data
+    const { data } = await axios.get(`${pokemonApiUrl}/pokemon-form/${req.params.id}`)
+
+    // Add name & sprite to response object
+    response.name = data.name
+    response.sprite = data.sprites.front_default
+
+    // Get description
+    let resp = await axios.get(`${pokemonApiUrl}/pokemon-species/${req.params.id}`)
+
+    // Return to user
+    return res.status(200).json(response)
+  } catch (error) {
+    console.log('error', error)
+  }
+})
+
 
 // CATCH ALL RESPONSE
 app.use((_req, res) => {

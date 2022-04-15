@@ -27,6 +27,14 @@ app.get('/pokemon/:id', async (req, res) => {
     // Get description
     let resp = await axios.get(`${pokemonApiUrl}/pokemon-species/${req.params.id}`)
 
+        // Get translation
+        resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
+          text: resp.data.flavor_text_entries[0].flavor_text
+        })
+        
+        // Add Translated description to response object
+        response.description = resp.data.contents.translated
+
     // Return to user
     return res.status(200).json(response)
   } catch (error) {

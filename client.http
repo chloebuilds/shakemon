@@ -1,5 +1,4 @@
 ### Testing with ID
 GET http://localhost:4000/pokemon/4
 
-###
-GET http://localhost:4000/pokemon/56
+

@@ -62,7 +62,7 @@ function PokeSearch() {
     <>
       <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
       <AsyncSelect 
-        placeholder="Type to find a pokemon.." 
+        placeholder='Type to find a pokemon..'
         loadOptions={handleLoadOptions} 
         onChange={handleChange} 
         />

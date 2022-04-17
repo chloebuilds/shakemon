@@ -8,7 +8,7 @@ function App() {
 
   return (
       <section className='app'>
-      <img src={Logo} alt="Shakemon Logo"/>
+      <img src={Logo} alt='Shakemon Logo' className='logo'/>
       <PokeSearch />
       </section>
   )

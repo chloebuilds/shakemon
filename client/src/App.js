@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react'
-// import axios from 'axios'
+import React from 'react'
+
 import PokeSearch from './components/PokeSearch'
+import Logo from './assets/shakemon-logo.png'
+
 
 function App() {
 
-  // const id = 25
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const { data } = await axios.get(`/pokemon/${id}`) 
-  //     console.log(data)
-  //   }
-  //   getData()
-  // })
-
   return (
-    <>
-      <h1>Shakemon</h1>
+      <section className='app'>
+      <img src={Logo} alt="Shakemon Logo"/>
       <PokeSearch />
-    </>
+      </section>
   )
 }
 

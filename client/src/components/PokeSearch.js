@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import AsyncSelect from 'react-select/async'
 
+import PokemonCard from './PokemonCard'
+
 const initialData = {
   name: '',
   sprite: '',
@@ -26,7 +28,7 @@ function PokeSearch() {
       }
       return Array({ // react-select needs an array to map over the options
         label: data.name,
-        value: `${data.name} ${data.id}`
+        value: data.id
       })
     } catch (err) {
       console.log(err)
@@ -58,17 +60,14 @@ function PokeSearch() {
 // ! still need to display error messages
   return  (
     <>
-      <h4>Pokemon Search</h4>
-      <p> Start typing the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
+      <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
       <AsyncSelect 
         placeholder="Type to find a pokemon.." 
         loadOptions={handleLoadOptions} 
         onChange={handleChange} 
         />
       <div>
-        <p>Name: {pokeData.name}</p>
-        <p>Sprite: {pokeData.sprite}</p>
-        <p>Description: {pokeData.description}</p>
+      <PokemonCard pokeData={pokeData}/>
       </div>
       </>
   )

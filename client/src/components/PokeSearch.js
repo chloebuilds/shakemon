@@ -14,6 +14,7 @@ function PokeSearch() {
 
   const [allPokemonData, setAllPokemonData] = React.useState([])
   const [pokeData, setPokeData] = React.useState(initialData)
+  const [value, setValue] = React.useState(null)
   const [error, setError] = React.useState(null)
   
 React.useEffect(() => {
@@ -62,17 +63,16 @@ React.useEffect(() => {
       setError('There was an error getting the data from the backend')
       return
   }
-  setError('There was an error getting the data from the backend')
   setPokeData({ // set the pokeData with the data from the backend with the shakespeare description
     name: finalData.data.name,
     sprite: finalData.data.sprite,
     description: data.description
   })
+  setValue(null)
 }
 
   return  (
     <>
-      {error && <Error errorMessage={error}/>}
     <div className='search-container'>
       <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
       <div className='search-bar'>
@@ -80,7 +80,9 @@ React.useEffect(() => {
         placeholder='Type to find a pokemon..'
         loadOptions={handleLoadOptions} 
         onChange={handleChange} 
+        value={value}
         />
+        {error && <Error errorMessage={error}/>}
       </div>
       </div>
       <PokemonCard pokeData={pokeData}/>

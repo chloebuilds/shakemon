@@ -3,65 +3,74 @@
 }
 
 .app {
-  padding: 5rem 5rem;
+  padding: 5rem 8rem 2rem;
   text-align: center;
   font-family: 'Roboto', sans-serif;
 
   .logo {
     padding-bottom: 2rem;
   }
-}
-
-.pokemon-card-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.pokemon-card {
-  background: rgb(255,254,23);
-  background: radial-gradient(circle, rgba(255,254,23,1) 0%, rgba(245,224,52,1) 35%, rgba(255,210,0,1) 100%);
-  border-radius: 10px;
-  padding: 20px 10px;
-  margin: 10px;
-  min-width: 228px;
-  max-width: 228px;
-  height: 317px;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  border: 12px solid rgb(255, 221, 0);
-
-  h3 {
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-bar {
+    min-width: 450px;
+  }
+  .pokemon-card-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+  .pokemon-card {
+    background: rgb(255,254,23);
+    background: radial-gradient(circle, rgba(255,254,23,1) 0%, rgba(245,224,52,1) 35%, rgba(255,210,0,1) 100%);
+    border-radius: 10px;
+    padding: 20px 10px;
     margin: 10px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  p {
-    font-weight: normal;
-    font-size: 14px;
-  }
-
-  .img {
-    width: 100px;
-    margin: 5px auto;
+    min-width: 228px;
+    max-width: 228px;
+    height: 317px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    border: 12px solid rgb(255, 221, 0);
+  
+    h3 {
+      margin: 0.6rem;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+    p {
+      font-weight: normal;
+      font-size: 0.875rem;
+      margin-top: 0;
+    }
+    img {
+      width: 7rem;
+      margin: 0.3rem auto;
+    }
   }
 }
 
 
 @media only screen and (max-width: 460px) {
   .app {
-    padding: 2rem 1rem;
-  }
-  .logo {
-    width: 100%;
-  }
-  .pokemon-card-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    padding: 3rem 1rem;
+    .logo {
+      width: 100%;
+    }
+    .search-bar {
+      min-width: 225px;
+    }
+    .pokemon-card-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
   }
 }

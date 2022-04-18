@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 import AsyncSelect from 'react-select/async'
-
 import PokemonCard from './PokemonCard'
 
 const initialData = {
@@ -12,63 +11,78 @@ const initialData = {
 
 function PokeSearch() {
 
+  const [allPokemonData, setAllPokemonData] = React.useState([])
   const [pokeData, setPokeData] = React.useState(initialData)
   const [error, setError] = React.useState(null)
   
+React.useEffect(() => {
+  const getAllPokemonData = async () => {
+    try { // getting all the pokemon so that I can filter through them to have an autopopulate search as the user types
+      const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon-species/?offset=0&limit=898')
+      setAllPokemonData(data.results)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  getAllPokemonData()
+}, [])
+
+
   const handleLoadOptions = async (inputValue) => {
     setError('')
-    console.log(inputValue)
-    try {
-      const { data } = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon-species/${inputValue}`
-      )
-      console.log('data from pokemon API -->', data)
-      if (data.Response === 'False') {
-        return []
-      }
-      return Array({ // react-select needs an array to map over the options
-        label: data.name,
-        value: data.id
+    try { // return the filtered pokemon names as the user searches, for an autopopulating search feature
+      const filteredPokemon = allPokemonData.filter((singlePokemon) => {
+        return singlePokemon.name.toLowerCase().startsWith(inputValue.toLowerCase())
       })
+
+      return filteredPokemon.map((poke) => ({ 
+        label: poke.name,
+        value: poke.name
+      }))
     } catch (err) {
       console.log(err)
       setError('Could not find the pokemon')
     }
   }
 
-  const handleChange = async ({ value: id }) => {
-    // on change, make the request to the back end with the id of the pokemon from pokemon API
-    console.log('id', id)
-    const { data } = await axios.get(
-      `/pokemon/${id}`
+  const handleChange = async ({ value: name }) => {
+      const { data } = await axios.get( // request to get all of the pokemon's data
+        `https://pokeapi.co/api/v2/pokemon-species/${name}`
+      )
+      if (data.Response === 'False') { // if no response then leave the react-select array empty
+        setError('Cannot find the pokemon you are looking for')
+        return
+      }
+    const pokeId = data.id
+    const finalData = await axios.get( // make the request to the backend with the id of the pokemon from pokemon API
+      `/pokemon/${pokeId}`
     )
-    console.log('pokemon data', data)
-    // if there is no response, set an error
-    if (data.Response === 'False') {
-      setError('There was an error setting the data')
+  
+    if (finalData.data.Response === 'False') { // if there is no response, set an error
+      setError('There was an error getting the data from the backend')
       return
   }
-  // set the pokemon data with the data from the backend with the shakespeare description
-  setPokeData({
-    name: data.name,
-    sprite: data.sprite,
+  setPokeData({ // set the pokeData with the data from the backend with the shakespeare description
+    name: finalData.data.name,
+    sprite: finalData.data.sprite,
     description: data.description
   })
-  console.log(pokeData)
 }
 
 // ! still need to display error messages
   return  (
     <>
+    <div className='search-container'>
       <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
+      <div className='search-bar'>
       <AsyncSelect 
         placeholder='Type to find a pokemon..'
         loadOptions={handleLoadOptions} 
         onChange={handleChange} 
         />
-      <div>
-      <PokemonCard pokeData={pokeData}/>
       </div>
+      </div>
+      <PokemonCard pokeData={pokeData}/>
       </>
   )
 }

@@ -16,7 +16,7 @@ You will find the backend in the server folder and the front end in the client f
 1. Run `npm i` or `yarn install` to install the dependencies. 
 2. To run the server, run `npm run serve` or `yarn serve`
 3. To run the client, run `npm run dev` or `yarn start`
-* make sure you are in the correct folder
+* make sure you are in the correct folder :)
 
 # The Backend
 The backend is built with Node/Express.js and it functions in the following process: 

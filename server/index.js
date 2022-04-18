@@ -24,17 +24,17 @@ app.get('/pokemon/:id', async (req, res) => {
     response.name = data.name
     response.sprite = data.sprites.front_default
 
-    // Get description
-    let resp = await axios.get(`${pokemonApiUrl}/pokemon-species/${req.params.id}`)
-      const respEN = resp.data.flavor_text_entries.find(entry => entry.language.name === 'en')
+    // // Get description
+    // let resp = await axios.get(`${pokemonApiUrl}/pokemon-species/${req.params.id}`)
+    //   const respEN = resp.data.flavor_text_entries.find(entry => entry.language.name === 'en')
 
-        // Get translation
-        resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
-          text: respEN.flavor_text
-        })
+    //     // Get translation
+    //     resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
+    //       text: respEN.flavor_text
+    //     })
         
-        // Add Translated description to response object
-        response.description = resp.data.contents.translated
+        // // Add Translated description to response object
+        // response.description = resp.data.contents.translated
 
     // Return to user
     return res.status(200).json(response)

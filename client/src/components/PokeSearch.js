@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import AsyncSelect from 'react-select/async'
 import PokemonCard from './PokemonCard'
+import Error from './Error'
 
 const initialData = {
   name: '',
@@ -57,11 +58,11 @@ React.useEffect(() => {
     const finalData = await axios.get( // make the request to the backend with the id of the pokemon from pokemon API
       `/pokemon/${pokeId}`
     )
-  
     if (finalData.data.Response === 'False') { // if there is no response, set an error
       setError('There was an error getting the data from the backend')
       return
   }
+  setError('There was an error getting the data from the backend')
   setPokeData({ // set the pokeData with the data from the backend with the shakespeare description
     name: finalData.data.name,
     sprite: finalData.data.sprite,
@@ -69,9 +70,9 @@ React.useEffect(() => {
   })
 }
 
-// ! still need to display error messages
   return  (
     <>
+      {error && <Error errorMessage={error}/>}
     <div className='search-container'>
       <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
       <div className='search-bar'>

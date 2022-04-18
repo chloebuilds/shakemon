@@ -1,5 +1,12 @@
-export default function Error() {
+import React from 'react'
+
+function Error({ errorMessage }) {
+
   return (
-    <h2>🥺 Oh no, something went wrong 🥺</h2>
+    <div className='error-message-container'>
+      <p className='error-message'>{errorMessage}</p>
+    </div>
   )
 }
+
+export default Error

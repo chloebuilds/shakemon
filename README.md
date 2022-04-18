@@ -3,12 +3,12 @@ Using the PokeAPI with the Shakespearean API to provide a Shakespearean descript
 
 # Technologies Used
 - Node.js
-- [PokeAPI](https://pokeapi.co/)
-- [Shakespearean Translator](https://funtranslations.com/api/shakespeare)
 - React.js
 - Axios
 - [React Select](https://react-select.com/home)
 - SCSS
+- [PokeAPI](https://pokeapi.co/)
+- [Shakespearean Translator](https://funtranslations.com/api/shakespeare)
 
 ## Getting Started
 You will find the backend in the server folder and the front end in the client folder. 

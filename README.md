@@ -20,11 +20,11 @@ You will find the backend in the server folder and the front end in the client f
 
 # The Backend
 The backend is built with Node/Express.js and it functions in the following process: 
-1. It takes the request from the user input on the frontend, 
+1. It takes the request from the user input on the frontend
 2. It then sends a request to the PokeAPI to retrieve the name and sprite
 4. It then gets the description and finds the entry in english
 5. It then takes the returned english description and sends this to the Shakespearean Translator API, which returns the translated description
-6. An object with the name, sprite and shakespearean translation is then sent to the frontend
+6. An object with the name, sprite and shakespearean translation is then returned to the frontend
 7. If there is an error at any stage, it returns a 404 and an error message
 
 # The Frontend
@@ -33,4 +33,4 @@ The frontend is built with React.js. The user interface contains a search bar wh
 Once the user has selected a pokemon by name, the id is taken from the data and sent to the backend to form the complete url to retreive the data and complete the translation. When returned the data is rendered and displayed on the pokemon card in the UI. 
 
 # Important information
-The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error with any more requests.
+The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error with any more requests. 

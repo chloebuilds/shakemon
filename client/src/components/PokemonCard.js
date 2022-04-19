@@ -6,15 +6,14 @@ function PokemonCard({ pokeData }) {
 
   return (
     <section className="pokemon-card-display">
-    
-    <div className='pokemon-card'>
-      <h3>{pokeData.name}</h3>
-      <img src={pokeData.sprite} alt={pokeData.name}/>
-      <p>{pokeData.description}</p>
-    </div>
-    <div>
-      <img src={CardBack} alt="Pokemon Card Back"/>
-    </div>
+      <div className='pokemon-card'>
+        <h3>{pokeData.name}</h3>
+        <img src={pokeData.sprite} alt={pokeData.name}/>
+        <p>{pokeData.description}</p>
+      </div>
+      <div>
+        <img src={CardBack} alt="Pokemon Card Back"/>
+      </div>
     </section>
   )
 }

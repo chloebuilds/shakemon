@@ -1,4 +1,5 @@
 @use './error.scss';
+@use './loader.scss';
 
 * {
   box-sizing: border-box;
@@ -8,6 +9,7 @@
   padding: 5rem 8rem 2rem;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+  position: relative;
 
   .logo {
     padding-bottom: 2rem;

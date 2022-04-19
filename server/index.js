@@ -35,7 +35,7 @@ app.get('/pokemon/:id', async (req, res) => {
         })
         // Add Translated description to response object
         response.description = resp.data.contents.translated
-console.log(response)
+
     // Return to user
     return res.status(200).json(response)
   } catch (error) {
@@ -56,3 +56,6 @@ app.use((req, _res, next) => {
 })
 
 app.listen(PORT, () => console.log(`🤖 Server running on port ${PORT}`))
+
+
+// module.exports = { respEN }

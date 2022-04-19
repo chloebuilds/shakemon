@@ -1,16 +1,22 @@
 {
-  "name": "shakespearean-pokemon",
+  "name": "shakemon-backend",
   "version": "1.0.0",
-  "description": "Gotta catcheth those folk all API ",
+  "description": "The backend for Shakemon ",
   "main": "index.js",
   "author": "Chloe Brown",
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "axios": "^0.26.1",
-    "express": "^4.17.2"
+    "babel-jest": "^27.5.1",
+    "express": "^4.17.2",
+    "jest": "^27.5.1"
   },
   "scripts": {
-    "serve": "npx nodemon index.js"
+    "serve": "npx nodemon index.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11"
   }
 }

@@ -1,8 +1,7 @@
-import express from 'express'
-import axios from 'axios'
+const express = require('express')
+const axios = require('axios')
 
 const app = express()
-const PORT = 4000
 
 // POKEMON API
 const pokemonApiUrl = 'https://pokeapi.co/api/v2'
@@ -29,12 +28,12 @@ app.get('/pokemon/:id', async (req, res) => {
 
       const respEN = resp.data.flavor_text_entries.find(entry => entry.language.name === 'en')
 
-        // Get translation
-        resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
-          text: respEN.flavor_text
-        })
-        // Add Translated description to response object
-        response.description = resp.data.contents.translated
+        // // Get translation
+        // resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
+        //   text: respEN.flavor_text
+        // })
+        // // Add Translated description to response object
+        // response.description = resp.data.contents.translated
 
     // Return to user
     return res.status(200).json(response)
@@ -54,8 +53,3 @@ app.use((req, _res, next) => {
   console.log(`🪶📜 Request for pokemon received: ${req.method} - ${req.url}`)
   next()
 })
-
-app.listen(PORT, () => console.log(`🤖 Server running on port ${PORT}`))
-
-
-// module.exports = { respEN }

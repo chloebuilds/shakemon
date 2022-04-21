@@ -1,5 +1,5 @@
 # Shakemon
-Using the PokeAPI with the Shakespearean API to provide a Shakespearean description of the chosen pokemon to send back to the frontend with the Pokemon name and sprite.
+A full-stack app that displays information about a given Pokemon. It uses the PokeAPI in the backend based on user input from the frontend to request the Pokemon's name, sprite and description. In the backend, the returned description is then passed to the Shakespearean translator API to provide a Shakespearean description of the chosen pokemon. Then the data is sent back to the frontend and rendered to the user interface.
 
 # Technologies Used
 - Node.js & Express
@@ -15,13 +15,15 @@ Using the PokeAPI with the Shakespearean API to provide a Shakespearean descript
 ### Testing
 - Jest
 - supertest
+- React Testing Library
+- react-select-event
 - ClientHTTP
 - Insomnia
 
 ## Getting Started
 You will find the backend in the server folder and the frontend in the client folder. 
 
-1. Run `npm i` or `yarn install` to install the dependencies in both server and client. 
+1. Run `npm i` or `yarn` to install the dependencies in both server and client. 
 2. To run the server, run `npm run serve` or `yarn serve`. Server must be running before you run client.
 3. To run the client, run `npm run dev` or `yarn start`
 * Please make sure you are in the correct folder :)

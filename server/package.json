@@ -1,7 +1,7 @@
 {
   "name": "shakemon-backend",
   "version": "1.0.0",
-  "description": "The backend for Shakemon ",
+  "description": "The backend for Shakemon",
   "main": "index.js",
   "author": "Chloe Brown",
   "license": "MIT",

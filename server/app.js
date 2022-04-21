@@ -1,5 +1,7 @@
 const express = require('express')
 const axios = require('axios')
+const errorHandler = require('./middleware/errorHandler')
+const logger = require('./middleware/logger')
 
 const app = express()
 
@@ -9,6 +11,8 @@ const pokemonApiUrl = 'https://pokeapi.co/api/v2'
 
 // MIDDLEWARE
 app.use(express.json())
+app.use(errorHandler)
+app.use(logger)
 
 // ROUTE - GOTTA CATCH EM ALL
 app.get('/pokemon/:id', async (req, res) => {
@@ -28,12 +32,12 @@ app.get('/pokemon/:id', async (req, res) => {
 
       const respEN = resp.data.flavor_text_entries.find(entry => entry.language.name === 'en')
 
-        // // Get translation
-        // resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
-        //   text: respEN.flavor_text
-        // })
-        // // Add Translated description to response object
-        // response.description = resp.data.contents.translated
+        // Get translation
+        resp = await axios.post('https://api.funtranslations.com/translate/shakespeare.json', {
+          text: respEN.flavor_text
+        })
+        // Add Translated description to response object
+        response.description = resp.data.contents.translated
 
     // Return to user
     return res.status(200).json(response)
@@ -43,15 +47,12 @@ app.get('/pokemon/:id', async (req, res) => {
   }
 })
 
+
 // CATCH ALL RESPONSE
 app.use((_req, res) => {
   return res.status(404).json({ message: 'Route not found' })
 })
 
-// LOGGER
-app.use((req, _res, next) => {
-  console.log(`🪶📜 Request for pokemon received: ${req.method} - ${req.url}`)
-  next()
-})
+
 
 module.exports = app

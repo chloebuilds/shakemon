@@ -19,7 +19,7 @@ Using the PokeAPI with the Shakespearean API to provide a Shakespearean descript
 - Insomnia
 
 ## Getting Started
-You will find the backend in the server folder and the front end in the client folder. 
+You will find the backend in the server folder and the frontend in the client folder. 
 
 1. Run `npm i` or `yarn install` to install the dependencies in both server and client. 
 2. To run the server, run `npm run serve` or `yarn serve`. Server must be running before you run client.

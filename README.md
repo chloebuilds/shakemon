@@ -2,15 +2,17 @@
 Using the PokeAPI with the Shakespearean API to provide a Shakespearean description of the chosen pokemon to send back to the frontend with the Pokemon name and sprite.
 
 # Technologies Used
-- Node.js
+- Node.js & Express
 - React.js
 - Axios
-- [React Select](https://react-select.com/home)
 - SCSS
+- [React Select](https://react-select.com/home)
+
+### APIs
 - [PokeAPI](https://pokeapi.co/)
 - [Shakespearean Translator](https://funtranslations.com/api/shakespeare)
 
-# Testing
+### Testing
 - Jest
 - supertest
 - ClientHTTP
@@ -44,5 +46,5 @@ Once the user has selected a pokemon by name, the id is taken from the data and 
 
 <hr/>
 
-# Important information
+## Important information
 The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error with any more requests. 

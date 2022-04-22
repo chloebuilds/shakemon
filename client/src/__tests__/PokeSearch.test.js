@@ -1,33 +1,26 @@
 import React from 'react'
-import { cleanup, render, screen, waitFor } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import axios from 'axios'
 import Loader from '../components/Loader'
 
 
 import Select from 'react-select'
 import selectEvent from 'react-select-event'
-import PokeSearch from '../components/PokeSearch'
+
 
 afterEach(cleanup)
 
 // test that the loader component renders on loading data
 test('Should render loading state', 
-  async () => {
+  () => {
     axios.get.mockRejectedValueOnce()
-
-    render(
-        <Loader />
-    )
-
-    const loadingIndicator = screen.getByRole('pokemon-loading')
-
+    render(<Loader />)
+    const loadingIndicator = screen.getByTestId('loading')
     expect(loadingIndicator).toBeInTheDocument()
-
-    await waitFor(() => expect(axios.get).toHaveBeenCalled())
   }
 )
 
-xtest('Should render pokeData on select of pokemon', async () => {
+test.skip('Should render pokeData on select of pokemon', async () => {
   
   const mockOptions = ['pikachu', 'charizard']
   

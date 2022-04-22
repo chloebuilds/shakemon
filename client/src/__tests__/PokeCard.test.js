@@ -4,7 +4,7 @@ import PokeCard from '../components/PokemonCard'
 
 afterEach(cleanup)
 
-xtest('Should display the pokeData in the PokeCard in PokeSearch',  () => {
+test.skip('Should display the pokeData in the PokeCard in PokeSearch',  () => {
     const mockPokeData = [
       {
         name: 'charizard',

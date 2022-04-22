@@ -4,7 +4,7 @@ import pokeball from '../assets/pokeball.png'
 function Loader() {
 
   return (
-    <div id="loading">
+    <div id="loading" data-testid="loading">
       <img src={pokeball} className='pokeball-loading' alt='Loading pokeball'/>
     </div>
   )

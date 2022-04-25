@@ -2,7 +2,7 @@ import React from 'react'
 import CardBack from '../assets/pokemon-card-back.png'
 
 
-function PokemonCard({ pokeData }) {
+function PokeCard({ pokeData }) {
 
   return (
     <section className="pokemon-card-display" aria-label='display of chosen pokemon data'>
@@ -18,4 +18,4 @@ function PokemonCard({ pokeData }) {
   )
 }
 
-export default PokemonCard
+export default PokeCard

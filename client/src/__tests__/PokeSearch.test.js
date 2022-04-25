@@ -1,10 +1,10 @@
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, render, screen, getByTestId } from '@testing-library/react'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
 import PokeSearch from '../components/PokeSearch'
 import AsyncSelect from 'react-select'
-import selectEvent from 'react-select-event'
+// import selectEvent from 'react-select-event'
 
 
 afterEach(cleanup)
@@ -16,13 +16,15 @@ test('Should render loading state', () => {
   }
 )
 
-test('Should render error message', () => {
+test('Should render error component', () => {
     const message = 'TEST_ERROR_MESSAGE'
     render(<Error message={message}/>)
     const errorMessage = screen.getByTestId('error')
     expect(errorMessage).toBeInTheDocument()
+    // expect(errorMessage).toHaveTextContent(message)
   }
 )
+
 
 test('renders the react-select to search for the pokemon', () => {
     render(<PokeSearch />)

@@ -1,10 +1,10 @@
 import { cleanup, render } from '@testing-library/react'
 import axios from 'axios'
-import PokeCard from '../components/PokemonCard'
+import PokeCard from '../components/PokeCard'
 
 afterEach(cleanup)
 
-test.skip('Should display the pokeData in the PokeCard in PokeSearch',  () => {
+test('Should display the pokeData in the PokeCard in PokeSearch',  () => {
     const mockPokeData = [
       {
         name: 'charizard',

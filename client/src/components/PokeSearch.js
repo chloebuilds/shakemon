@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import AsyncSelect from 'react-select/async'
-import PokemonCard from './PokemonCard'
+import PokeCard from './PokeCard'
 import Error from './Error'
 import Loader from './Loader'
 
@@ -11,7 +11,7 @@ const initialData = {
   description: ''
 }
 
-const PokeSearch = () => {
+function PokeSearch() {
 
   const [allPokemonData, setAllPokemonData] = React.useState([])
   const [pokeData, setPokeData] = React.useState(initialData)
@@ -28,7 +28,7 @@ React.useEffect(() => {
       const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon-species/?offset=0&limit=898')
       setAllPokemonData(data.results)
     } catch (err) {
-      setError('Cannot connect to the database right now, please try again shortly')
+      console.log(err)
     }
   }
   getAllPokemonData()
@@ -57,7 +57,7 @@ React.useEffect(() => {
       const { data } = await axios.get( // request to get all of the pokemon's data
         `https://pokeapi.co/api/v2/pokemon-species/${name}`
       )
-      if (data.response === 'fqalse') { // if no response then set the error message
+      if (data.response === 'false') { // if no response then set the error message
         setError('Cannot find the pokemon you are looking for')
         return
       }
@@ -66,7 +66,7 @@ React.useEffect(() => {
       `/pokemon/${pokeId}`
     )
   
-    if (finalData.isAxiosError) { // if there is no data - too many requests, set an error
+    if (finalData.isAxiosError) { // if there is no data - set an error
       setError('You\'ve reached the maximum number of requests. Please try again in an hour.')
       return
   }
@@ -124,7 +124,7 @@ React.useEffect(() => {
           {error && <Error errorMessage={error}/>}
         </div>
       </div>
-      <PokemonCard pokeData={pokeData}/>
+      <PokeCard pokeData={pokeData}/>
       </>
   )
 }

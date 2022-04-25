@@ -1,7 +1,7 @@
 import React from 'react'
 import pokeball from '../assets/pokeball.png'
 
-const Loader = () => {
+function Loader() {
 
   return (
     <div id="loading" data-testid="loading">

@@ -2,7 +2,7 @@
   "name": "shakemon-backend",
   "version": "1.0.0",
   "description": "The backend for Shakemon",
-  "main": "index.js",
+  "main": "app.js",
   "author": "Chloe Brown",
   "license": "MIT",
   "dependencies": {
@@ -22,5 +22,12 @@
     "jest": "^27.5.1",
     "superagent": "^7.1.2",
     "supertest": "^6.2.2"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": ["@babel/plugin-transform-modules-commonjs"]
+      }
   }
+}
 }

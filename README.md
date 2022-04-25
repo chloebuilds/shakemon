@@ -46,7 +46,9 @@ The frontend is built with React.js. The user interface contains a search bar wh
 
 Once the user has selected a pokemon by name, the id is taken from the data and sent to the backend to form the complete url to retreive the data and complete the translation. When returned the data is rendered and displayed on the pokemon card in the UI. 
 
+To run a test: `npm test`. Testing on the frontend uses Jest and React Testing Library. 
+
 <hr/>
 
 ## Important information
-The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error with any more requests. 
+The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error and stop any more requests for the translated description. 

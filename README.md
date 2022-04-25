@@ -51,4 +51,4 @@ To run a test: `npm test`. Testing on the frontend uses Jest and React Testing L
 <hr/>
 
 ## Important information
-The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error and stop any more requests for the translated description. 
+The Shakespearean Translation API will only return 5 requests an hour - so once you have retreived 5 then it will error and no longer translate the description.

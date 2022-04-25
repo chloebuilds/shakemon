@@ -1,10 +1,13 @@
 import React from 'react'
 
-function Error({ errorMessage }) {
+const Error = ({ errorMessage }) => {
+
+  console.log(errorMessage)
 
   return (
-    <div className='error-message-container'>
-      <p className='error-message'>{errorMessage}</p>
+    <div className="error-message-container">
+      <p className="error-message" data-testid="error" aria-busy="true" aria-live="polite" role="alert">
+        {errorMessage}</p>
     </div>
   )
 }

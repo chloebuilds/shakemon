@@ -12,12 +12,8 @@ test.skip('Should display the pokeData in the PokeCard in PokeSearch',  () => {
         description: 'Spits fire yond is hot enow to melt boulders. Known to cause forest fires unintentionally.',
       },
     ]
-
     axios.get.mockResolvedValueOnce({ data: mockPokeData })
-
     render(<PokeCard pokeData={mockPokeData} />)
-
-
   }
 )
 

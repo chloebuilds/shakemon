@@ -1,46 +1,53 @@
 import React from 'react'
 import { cleanup, render, screen } from '@testing-library/react'
-import axios from 'axios'
 import Loader from '../components/Loader'
-
-
-import Select from 'react-select'
+import Error from '../components/Error'
+import PokeSearch from '../components/PokeSearch'
+import AsyncSelect from 'react-select'
 import selectEvent from 'react-select-event'
 
 
 afterEach(cleanup)
 
-// test that the loader component renders on loading data
-test('Should render loading state', 
-  () => {
-    axios.get.mockRejectedValueOnce()
+test('Should render loading state', () => {
     render(<Loader />)
     const loadingIndicator = screen.getByTestId('loading')
     expect(loadingIndicator).toBeInTheDocument()
   }
 )
 
-test.skip('Should render pokeData on select of pokemon', async () => {
+test('Should render error message', () => {
+    const message = 'TEST_ERROR_MESSAGE'
+    render(<Error message={message}/>)
+    const errorMessage = screen.getByTestId('error')
+    expect(errorMessage).toBeInTheDocument()
+  }
+)
+
+test('renders the react-select to search for the pokemon', () => {
+    render(<PokeSearch />)
+    const pokemonSearch = screen.getByLabelText('pokemon-search-select')
+    expect(pokemonSearch).toBeInTheDocument()
+  }
+)
+
+
+test('React-select/async should select a pokemon choice', async () => {
+  const mockOption = ['pikachu']
   
-  const mockOptions = ['pikachu', 'charizard']
-  
-  const {getByTestId, getByLabelText} = render(
+  const {getByTestId, 
+        //getByLabelText
+      } = render(
     <form data-testid="form">
-      <label htmlFor="pokemon">Pokemon</label>
-      <Select options={mockOptions} name="pokemon" inputId="pokemon" isMulti />
+      <label htmlFor="pokemon-search-select">Select your Pokemon</label>
+      <AsyncSelect options={mockOption} name="pokemon" inputId="pokemon-search-select" />
     </form>,
   )
-  expect(getByTestId('form')).toHaveFormValues({pokemon: ''}) // empty select
-  
-  // select two values...
-  await selectEvent.select(getByLabelText('Pokemon'), ['pikachu', 'charizard'])
-  expect(getByTestId('form')).toHaveFormValues({pokemon: ['pikachu', 'charizard']})
-  
-  // ...and add a third one
-  await selectEvent.select(getByLabelText('Pokemon'), 'eevee')
-  expect(getByTestId('form')).toHaveFormValues({
-    pokemon: ['pikachu', 'charizard', 'eevee'],
-  })
+  expect(getByTestId('form')).toHaveFormValues({pokemon: ''})
+  // await selectEvent.select(getByLabelText(/select your pokemon/i), [/pikachu/i])
+  // expect(getByTestId('form')).toHaveFormValues({pokemon: [/pikachu/i]})
 })
+
+
 
 

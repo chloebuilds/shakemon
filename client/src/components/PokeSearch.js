@@ -11,13 +11,15 @@ const initialData = {
   description: ''
 }
 
-function PokeSearch() {
+const PokeSearch = () => {
 
   const [allPokemonData, setAllPokemonData] = React.useState([])
   const [pokeData, setPokeData] = React.useState(initialData)
   const [value, setValue] = React.useState(null)
   const [error, setError] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
+  const [ariaFocusMessage, setAriaFocusMessage] = React.useState('');
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   
 React.useEffect(() => {
   setLoading(true)
@@ -26,7 +28,7 @@ React.useEffect(() => {
       const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon-species/?offset=0&limit=898')
       setAllPokemonData(data.results)
     } catch (err) {
-      console.log(err)
+      setError('Cannot connect to the database right now, please try again shortly')
     }
   }
   getAllPokemonData()
@@ -55,7 +57,7 @@ React.useEffect(() => {
       const { data } = await axios.get( // request to get all of the pokemon's data
         `https://pokeapi.co/api/v2/pokemon-species/${name}`
       )
-      if (data.response === 'False') { // if no response then set the error message
+      if (data.response === 'fqalse') { // if no response then set the error message
         setError('Cannot find the pokemon you are looking for')
         return
       }
@@ -63,9 +65,9 @@ React.useEffect(() => {
     const finalData = await axios.get( // make the request to the backend with the id of the pokemon from pokemon API
       `/pokemon/${pokeId}`
     )
-    console.log(finalData)
-    if (finalData.isAxiosError) { // if there is no data, set an error
-      setError('There was an error getting the pokemon details')
+  
+    if (finalData.isAxiosError) { // if there is no data - too many requests, set an error
+      setError('You\'ve reached the maximum number of requests. Please try again in an hour.')
       return
   }
   setPokeData({ // set the pokeData with the data from the backend with the shakespeare description
@@ -77,18 +79,48 @@ React.useEffect(() => {
   setLoading(false)
 }
 
+  // ACCESSIBILITY FOR SELECT
+  const onMenuOpen = () => setIsMenuOpen(true);
+  const onMenuClose = () => setIsMenuOpen(false);
+
+  const onFocus = ({ focused, isDisabled }) => {
+    const msg = `You are currently focused on option ${focused.label}${
+      isDisabled ? ', disabled' : ''
+    }`;
+    console.log(msg)
+    setAriaFocusMessage(msg);
+    
+    return msg;
+  };
+
   return  (
     <>
-    {loading && <Loader />}
-    <div className='search-container'>
-      <p> Enter the name of the pokemon you are searching for below and see Shakespeare describe your chosen pokemon.</p>
-        <div className='search-bar'>
+    {loading && <Loader/>}
+    <div className="search-container">
+      <p> Enter the name of the Pokemon you are searching for below and see Shakespeare describe your chosen Pokemon on the Pokemon card.</p>
+        <div className="search-bar" data-testid="pokemon-search">
+        <form data-testid="form" role="search">
+          <label className="sr-only" htmlFor="pokemon-search-select" data-testid="sr-only" aria-label='pokemon-search-select'>
+            Select your Pokemon
+          </label>
+
+          {!!ariaFocusMessage && !!isMenuOpen && (
+        <blockquote className="sr-only" data-testid="sr-only">"{ariaFocusMessage}"</blockquote>
+        )}
+
         <AsyncSelect 
-          placeholder='Type to find a pokemon..'
+          placeholder="Type to find a pokemon.."
+          aria-placeholder="Type to find a pokemon"
+          name="pokemon"
           loadOptions={handleLoadOptions} 
           onChange={handleChange} 
           value={value}
+          inputId="pokemon-search-select"
+          ariaLiveMessages={{onFocus}}
+          onMenuOpen={onMenuOpen}
+          onMenuClose={onMenuClose}
           />
+          </form>
           {error && <Error errorMessage={error}/>}
         </div>
       </div>
